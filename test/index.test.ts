@@ -8,10 +8,10 @@ import { renderPDF } from '../src/index';
  */
 describe('renderPDF', () => {
   
-  it('chooses BestPDFEngine if the file requires Annotation, Encryption and Search', () => {
+  it('chooses BestPDFEngine if the file requires Annotation, Encryption and Search', async () => {
     const fileInfoByte = 0b111;
     const pathToPDFFile = './example.pdf';
-    const pdfWrapper = renderPDF(pathToPDFFile, fileInfoByte);
+    const pdfWrapper = await renderPDF(pathToPDFFile, fileInfoByte);
     expect(pdfWrapper.engineName).toEqual('BestPDFEngine');
     // Expect pdfWrapper.annotate() to work
     // Expect pdfWrapper.encrypt() to work
