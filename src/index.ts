@@ -1,9 +1,9 @@
 import { PdfEngine } from "./engines/Ipdfengine";
-import { AlsoOkPDFEngine } from "./engines/alsookpdfengine";
-import { BestPDFEngine } from "./engines/bestpdfengine";
-import { BetterPDFEngine } from "./engines/betterpdfengine";
-import { OkPDFEngine } from "./engines/okpdfengine";
 import { SoSoPDFEngine } from "./engines/sosopdfengine";
+import { OkPDFEngine } from "./engines/okpdfengine";
+import { AlsoOkPDFEngine } from "./engines/alsookpdfengine";
+import { BetterPDFEngine } from "./engines/betterpdfengine";
+import { BestPDFEngine } from "./engines/bestpdfengine";
 
 /**
  * Implement this interface. 
@@ -25,23 +25,35 @@ export async function renderPDF(pathToPDFFile: string, fileInfoByte: number): Pr
   // B_1 = Encrypt/Decrypt
   // B_0 = Search
   const trimmedFileInfoByte = fileInfoByte%8
+  console.log('trimmedByte', trimmedFileInfoByte)
   const engineSelector: () => PdfEngine = () => {
     switch (trimmedFileInfoByte) {
       case 0b000:
+        console.log('SoSoPDFEngine')
         return new SoSoPDFEngine()
       case 0b001:
+        console.log('OkPDFEngine')
         return new OkPDFEngine()
       case 0b010:
+        console.log('AlsoOkPDFEngine')
         return new AlsoOkPDFEngine()
       case 0b011:
+        console.log('BestPDFEngine')
         return new BestPDFEngine()
       case 0b100:
+        console.log('BetterPDFEngine')
+        return new BetterPDFEngine()
       case 0b101:
+        console.log('BetterPDFEngine')
         return new BetterPDFEngine()
       case 0b110:
+        console.log('BestPDFEngine')
+        return new BestPDFEngine()
       case 0b111:
+        console.log('BestPDFEngine')
         return new BestPDFEngine()
       default:
+        console.log('BestPDFEngine')
         return new BestPDFEngine()
     }
   }
