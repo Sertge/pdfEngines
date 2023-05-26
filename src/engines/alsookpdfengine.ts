@@ -3,6 +3,7 @@ import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import { PdfEngine } from './Ipdfengine'
 
 class AlsoOkPDFEngine implements PdfEngine {
+  engineName = 'AlsoOkPDFEngine'
   currentDocument: PDFDocumentProxy | undefined
   LoadDocument = async (pathToPDFFile: string) => {
     const documentTask = await pdfjs.getDocument(pathToPDFFile).promise
@@ -43,9 +44,11 @@ class AlsoOkPDFEngine implements PdfEngine {
   }
   Encrypt = async () => {
     console.log('The file has been encrypted')
+    return `${this.engineName} Encrypt method is working`
   }
   Decypt = async () => {
     console.log('The file has been decrypted')
+    return `${this.engineName} Decrypt method is working`
   }
 }
 

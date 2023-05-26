@@ -3,6 +3,7 @@ import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import { PdfEngine } from './Ipdfengine'
 
 class BestPDFEngine implements PdfEngine {
+  engineName = 'BestPDFEngine'
   currentDocument: PDFDocumentProxy | undefined
   LoadDocument = async (pathToPDFFile: string) => {
     const documentTask = await pdfjs.getDocument(pathToPDFFile).promise
@@ -43,15 +44,19 @@ class BestPDFEngine implements PdfEngine {
   }
   Search? = async (searchTerm: string) => {
     console.log(`You are searching for ${searchTerm}`)
+    return `${this.engineName} Search method is working`
   }
-  annotate = async (annotation: string) => {
+  Annotate = async (annotation: string) => {
     console.log(`Added annotation ${annotation}`)
+    return `${this.engineName} Annotate method is working`
   }
   Encrypt = async () => {
     console.log('The file has been encrypted')
+    return `${this.engineName} Annotate method is working`
   }
   Decypt = async () => {
     console.log('The file has been decrypted')
+    return `${this.engineName} Annotate method is working`
   }
 }
 

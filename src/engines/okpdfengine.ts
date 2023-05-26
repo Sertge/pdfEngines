@@ -3,6 +3,7 @@ import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import { PdfEngine } from './Ipdfengine'
 
 class OkPDFEngine implements PdfEngine {
+  engineName = 'OkPDFEngine'
   currentDocument: PDFDocumentProxy | undefined
   LoadDocument = async (pathToPDFFile: string) => {
     const documentTask = await pdfjs.getDocument(pathToPDFFile).promise
@@ -41,8 +42,9 @@ class OkPDFEngine implements PdfEngine {
     const currentPage = await this.currentDocument.getPage(pageNumber)
     await currentPage.render({ canvasContext: ctx, viewport: currentPage.getViewport({ scale: 1.0 })}).promise
   }
-  Search? = async (searchTerm: string) => {
+  Search = async (searchTerm: string) => {
     console.log(`You are searching for ${searchTerm}`)
+    return `${this.engineName} Search method is working`
   }
 }
 

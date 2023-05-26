@@ -4,16 +4,12 @@ import { BestPDFEngine } from "./engines/bestpdfengine";
 import { BetterPDFEngine } from "./engines/betterpdfengine";
 import { OkPDFEngine } from "./engines/okpdfengine";
 import { SoSoPDFEngine } from "./engines/sosopdfengine";
-import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 
 /**
  * Implement this interface. 
  * Engine name is just an example, feel free to structure this as you see fit
  */ 
-interface PDFWrapper {
-  engineName: string;
-  fileData: PDFDocumentProxy;
-}
+interface PDFWrapper extends PdfEngine {}
 
 /**
  * 
@@ -51,10 +47,8 @@ export async function renderPDF(pathToPDFFile: string, fileInfoByte: number): Pr
   }
 
   const engine = engineSelector()
-  const pdfWrapper: PDFWrapper = {
-    engineName: 'SoSoPDFEngine',
-    fileData: await engine.LoadDocument(pathToPDFFile)
-  };
+  await engine.LoadDocument(pathToPDFFile)
+  const pdfWrapper: PDFWrapper = engine;
   return pdfWrapper;
 }
 

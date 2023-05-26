@@ -3,6 +3,7 @@ import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import { PdfEngine } from './Ipdfengine'
 
 class SoSoPDFEngine implements PdfEngine {
+  engineName = 'SoSoPDFEngine'
   currentDocument: PDFDocumentProxy | undefined
   LoadDocument = async (pathToPDFFile: string) => {
     const documentTask = await pdfjs.getDocument(pathToPDFFile).promise

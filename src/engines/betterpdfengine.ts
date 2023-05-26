@@ -3,6 +3,7 @@ import { PDFDocumentProxy } from 'pdfjs-dist/types/src/display/api'
 import { PdfEngine } from './Ipdfengine'
 
 class BetterPDFEngine implements PdfEngine {
+  engineName = 'BetterPDFEngine'
   currentDocument: PDFDocumentProxy | undefined
   LoadDocument = async (pathToPDFFile: string) => {
     const documentTask = await pdfjs.getDocument(pathToPDFFile).promise
@@ -41,8 +42,9 @@ class BetterPDFEngine implements PdfEngine {
     const currentPage = await this.currentDocument.getPage(pageNumber)
     await currentPage.render({ canvasContext: ctx, viewport: currentPage.getViewport({ scale: 1.0 })}).promise
   }
-  annotate = async (annotation: string) => {
+  Annotate = async (annotation: string) => {
     console.log(`Added annotation ${annotation}`)
+    return `${this.engineName} Annotate method is working`
   }
 }
 
